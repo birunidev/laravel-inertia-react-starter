@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.page-title {
+    @apply text-2xl md:text-3xl font-bold text-gray-800;
+}
+
+body {
+    overflow-x: hidden;
+    font-family: "Plus Jakarta Sans";
+}
+
+.custom-container {
+    @apply mx-auto w-[95%] max-w-[1360px];
+}
+
+.btn-error {
+    @apply bg-red-600 text-white;
+}
+.btn-primary {
+    @apply text-white;
+}
+
+.btn-success {
+    @apply bg-green-600 text-white;
+}
+.menu li a,
+.menu summary {
+    @apply py-4;
+}
+
+.join-primary .join-item {
+    @apply bg-white text-primary;
+}
+
+.join-primary .join-item.btn-active {
+    @apply bg-primary text-white;
+}
+
+.badge-custom {
+    @apply px-2 py-1 h-auto rounded-lg font-semibold;
+}
+
+.badge-error {
+    @apply bg-red-600/20 text-white text-red-600;
+}
+
+.badge-primary {
+    @apply bg-primary/20 text-white text-primary;
+}
+
+.badge-success {
+    @apply bg-green-600/20 text-white text-green-600;
+}
+
+.page-section {
+    @apply shadow bg-white rounded-xl;
+}
+.page-section__header {
+    @apply py-4 px-6 border-b border-base-300;
+}
+.page-section__body {
+    @apply py-2 px-6 pb-6;
+}
+.page-section__title {
+    @apply text-xl font-bold text-gray-800;
+}
+
+.custom-form {
+    @apply space-y-4;
+}
+
+.notification-label {
+    @apply z-[9999];
+}

@@ -6,6 +6,7 @@ use App\Http\Controllers\API\BaseController;
 use App\Http\Requests\User\CreateUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends BaseController
 {
@@ -71,6 +72,13 @@ class UserController extends BaseController
         $user = User::find($id);
         if (is_null($user)) {
             return $this->sendError('User not found.');
+        }
+
+        // delete folder associated with user id
+        $path = storage_path('app/public/uploads/user-' . $user->id);
+
+        if (Storage::disk('public')->has('uploads/user-' . $user->id)) {
+            Storage::disk('public')->deleteDirectory('uploads/user-' . $user->id);
         }
 
         $user->delete();

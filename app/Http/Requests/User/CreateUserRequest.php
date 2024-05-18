@@ -25,7 +25,9 @@ class CreateUserRequest extends FormRequest
             'name' => 'required',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:6',
-            'password_confirmation' => 'required|same:password'
+            'password_confirmation' => 'required|same:password',
+            'roles' => 'array',
+            'roles.*' => 'exists:roles,id'
         ];
     }
 }
