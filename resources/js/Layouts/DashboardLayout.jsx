@@ -1,5 +1,5 @@
 import MenuLink from "@/Components/atoms/MenuLink";
-import { Link, usePage } from "@inertiajs/react";
+import { Link, router, usePage } from "@inertiajs/react";
 import React, { useEffect } from "react";
 import { HiOutlineHome, HiOutlineUser, HiOutlineUsers } from "react-icons/hi2";
 import { toast } from "sonner";
@@ -51,11 +51,11 @@ export default function DashboardLayout({ children }) {
                                     <span className="badge">New</span>
                                 </Link>
                             </li>
+
                             <li>
-                                <a>Settings</a>
-                            </li>
-                            <li>
-                                <a>Logout</a>
+                                <a onClick={() => router.post(route("logout"))}>
+                                    Logout
+                                </a>
                             </li>
                         </ul>
                     </div>
