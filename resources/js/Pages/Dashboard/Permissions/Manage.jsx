@@ -2,8 +2,9 @@ import FormInput from "@/Components/atoms/FormInput";
 import FormSelect from "@/Components/atoms/FormSelect";
 import DashboardLayout from "@/Layouts/DashboardLayout";
 import { Link, useForm, usePage } from "@inertiajs/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { FiSave } from "react-icons/fi";
+import slugify from "slugify";
 
 export default function ManagePermission() {
     const page = usePage().props;
@@ -18,12 +19,19 @@ export default function ManagePermission() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
         if (permission) {
             put(route("dashboard.permissions.update", permission.id));
         } else {
             post(route("dashboard.permissions.store"));
         }
     };
+
+    useEffect(() => {
+        if (data.display_name) {
+            setData("name", slugify(data.display_name, { lower: true }));
+        }
+    }, [data.display_name]);
 
     return (
         <DashboardLayout>

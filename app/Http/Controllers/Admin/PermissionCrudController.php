@@ -26,7 +26,7 @@ class PermissionCrudController extends Controller
             return $query->orderBy($sortField, request('sortDirection') ? request('sortDirection') : 'asc');
         });
 
-        $permissions = $permissionQuery->paginate(5);
+        $permissions = $permissionQuery->paginate(15);
 
         return Inertia::render('Dashboard/Permissions/Index', compact('permissions'));
     }

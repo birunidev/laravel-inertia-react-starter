@@ -1,8 +1,9 @@
 import FormInput from "@/Components/atoms/FormInput";
 import DashboardLayout from "@/Layouts/DashboardLayout";
 import { Link, useForm, usePage } from "@inertiajs/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { FiSave } from "react-icons/fi";
+import slugify from "slugify";
 
 export default function ManageRole() {
     const page = usePage().props;
@@ -22,6 +23,12 @@ export default function ManageRole() {
             post(route("dashboard.roles.store"));
         }
     };
+
+    useEffect(() => {
+        if (data.display_name) {
+            setData("name", slugify(data.display_name, { lower: true }));
+        }
+    }, [data.display_name]);
 
     return (
         <DashboardLayout>
