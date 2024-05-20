@@ -61,7 +61,7 @@ body {
     @apply py-4 px-6 border-b border-base-300;
 }
 .page-section__body {
-    @apply py-2 px-6 pb-6;
+    @apply py-2 pt-5 px-6 pb-6;
 }
 .page-section__title {
     @apply text-xl font-bold text-gray-800;

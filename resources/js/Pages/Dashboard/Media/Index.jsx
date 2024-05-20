@@ -1,7 +1,7 @@
 import DataTable from "@/Components/molecules/DataTable";
 import MediaLibrary from "@/Components/organisms/MediaLibrary";
 import DashboardLayout from "@/Layouts/DashboardLayout";
-import { getAllQueryParams, getMediaUrl } from "@/utils";
+import { getMediaUrl } from "@/utils";
 import { Link, router, usePage } from "@inertiajs/react";
 import React from "react";
 import { HiOutlineTrash } from "react-icons/hi2";
@@ -9,16 +9,7 @@ import { HiOutlineTrash } from "react-icons/hi2";
 export default function Index() {
     const page = usePage().props;
 
-    const queryParams = getAllQueryParams();
-
     const { data, ...pagination } = page.medias;
-
-    const handleSearch = (search) => {
-        router.get(route("dashboard.permission-groups"), {
-            ...queryParams,
-            search: search,
-        });
-    };
 
     const handleDelete = (id) => {
         const confirmed = confirm("Are you sure you want to delete this data?");
@@ -26,8 +17,6 @@ export default function Index() {
 
         router.delete(route("dashboard.permission-groups.destroy", id));
     };
-
-    console.log(pagination);
 
     return (
         <DashboardLayout>
@@ -59,6 +48,7 @@ export default function Index() {
                 </div>
             </div>
             <DataTable
+                title="Browse Media"
                 dataSource={data}
                 pagination={pagination}
                 columns={[

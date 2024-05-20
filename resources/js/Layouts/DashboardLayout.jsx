@@ -3,6 +3,7 @@ import { Link, usePage } from "@inertiajs/react";
 import React, { useEffect } from "react";
 import { HiOutlineHome, HiOutlineUser, HiOutlineUsers } from "react-icons/hi2";
 import { toast } from "sonner";
+import { IoSettingsOutline } from "react-icons/io5";
 import { BsCardImage } from "react-icons/bs";
 
 export default function DashboardLayout({ children }) {

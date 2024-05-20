@@ -14,9 +14,14 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
+        // check if the table is empty before seeding
+
         $this->call([
+            PermissionGroupSeeder::class,
+            PermissionSeeder::class,
             RoleSeeder::class,
             UserSeeder::class,
+            IndoRegionSeeder::class
         ]);
     }
 }
