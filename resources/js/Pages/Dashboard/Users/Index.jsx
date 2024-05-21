@@ -79,7 +79,7 @@ export default function IndexUser() {
                                 {data.roles.map((role) => (
                                     <span
                                         key={role.id}
-                                        className={`badge badge-custom ${
+                                        className={`badge badge-custom text-center ${
                                             roleColorMapper[role.display_name]
                                         }`}
                                     >

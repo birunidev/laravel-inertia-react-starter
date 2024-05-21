@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\PermissionGroup;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -63,6 +64,11 @@ class RoleCrudController extends Controller
     public function show(string $id)
     {
         //
+        $role = Role::findOrFail($id);
+        $rolePermissions = $role->permissions->pluck('name')->toArray();
+        $permissionGroups = PermissionGroup::with('permissions')->get();
+
+        return Inertia::render('Dashboard/Roles/Show', compact('role', 'rolePermissions', 'permissionGroups'));
     }
 
     /**
@@ -82,8 +88,8 @@ class RoleCrudController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'name' => 'required|string|unique:roles,name,' . $id,
-            'display_name' => 'required|string',
+            'name' => 'nullable|string|unique:roles,name,' . $id,
+            'display_name' => 'nullable|string',
         ]);
 
         $role = Role::findOrFail($id);
@@ -91,6 +97,14 @@ class RoleCrudController extends Controller
         $role->update($request->all());
 
         session()->flash('success', 'Role updated successfully');
+
+        if ($request->has('permissions')) {
+            $role->syncPermissions($request->permissions);
+        }
+
+        if ($request->has('from_show_page')) {
+            return redirect()->route('dashboard.roles.show', $role->id);
+        }
 
         return redirect()->route('dashboard.roles');
     }

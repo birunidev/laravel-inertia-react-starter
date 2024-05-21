@@ -23,10 +23,10 @@ export default function DataTable({
 
     return (
         <div className="shadow p-4 rounded-lg space-y-3 bg-white">
-            <div className="flex items-center">
-                <p className="font-semibold w-2/3">{title}</p>
+            <div className="flex md:flex-row flex-col gap-3 md:items-center">
+                <p className="font-semibold lg:w-2/3">{title}</p>
                 {searchable && (
-                    <div className="ml-auto flex items-center justify-end gap-2 w-1/3">
+                    <div className="ml-auto flex items-center justify-end gap-2 w-full lg:w-1/3">
                         <input
                             type="text"
                             value={search}
@@ -37,7 +37,7 @@ export default function DataTable({
                             }}
                             onChange={(e) => setSearch(e.target.value)}
                             placeholder=""
-                            className="input input-bordered input-sm max-w-[200px] w-full"
+                            className="input input-bordered input-sm lg:max-w-[200px] w-full"
                         />
                         <button
                             onClick={() => handleSearch(search)}

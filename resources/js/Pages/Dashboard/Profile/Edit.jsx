@@ -1,8 +1,15 @@
 import FormInput from "@/Components/atoms/FormInput";
+import FormSelect from "@/Components/atoms/FormSelect";
 import MediaLibrary from "@/Components/organisms/MediaLibrary";
 import DashboardLayout from "@/Layouts/DashboardLayout";
+import {
+    getDistricts,
+    getProvinces,
+    getRegencies,
+    getVillages,
+} from "@/services/region.services";
 import { Link, useForm, usePage } from "@inertiajs/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { HiArrowUpTray } from "react-icons/hi2";
 
 export default function EditProfile() {
@@ -21,6 +28,10 @@ export default function EditProfile() {
         district_id: user?.detail?.district_id ?? "",
         village_id: user?.detail?.village_id ?? "",
     });
+    const [provinces, setProvinces] = useState([]);
+    const [regencies, setRegencies] = useState([]);
+    const [districts, setDistricts] = useState([]);
+    const [villages, setVillages] = useState([]);
 
     const handleConfirmMedia = (selectedMedia) => {
         setData("profile_picture", selectedMedia);
@@ -31,6 +42,39 @@ export default function EditProfile() {
         e.preventDefault();
         patch(route("dashboard.profile.update"));
     };
+
+    useEffect(() => {
+        getProvinces().then((res) => {
+            setProvinces(res.data);
+        });
+    }, []);
+
+    useEffect(() => {
+        if (data.province_id) {
+            getRegencies(data.province_id).then((res) => {
+                setRegencies(res.data);
+                setDistricts([]);
+                setVillages([]);
+            });
+        }
+    }, [data.province_id]);
+
+    useEffect(() => {
+        if (data.regency_id) {
+            getDistricts(data.regency_id).then((res) => {
+                setDistricts(res.data);
+                setVillages([]);
+            });
+        }
+    }, [data.regency_id]);
+
+    useEffect(() => {
+        if (data.district_id) {
+            getVillages(data.district_id).then((res) => {
+                setVillages(res.data);
+            });
+        }
+    }, [data.district_id]);
 
     return (
         <DashboardLayout>
@@ -77,39 +121,105 @@ export default function EditProfile() {
                             <HiArrowUpTray />
                             Upload Your Photo
                         </button>
-                        <div className="space-y-1 my-3">
-                            <FormInput
-                                label="Name"
-                                value={data?.name}
-                                onChange={(e) =>
-                                    setData("name", e.target.value)
-                                }
-                                error={errors?.name}
-                            />
-                            <FormInput
-                                label="Email Address"
-                                value={data?.email}
-                                onChange={(e) =>
-                                    setData("email", e.target.value)
-                                }
-                                error={errors?.email}
-                            />
-                            <FormInput
-                                label="Phone"
-                                value={data?.phone}
-                                onChange={(e) =>
-                                    setData("phone", e.target.value)
-                                }
-                                error={errors?.phone}
-                            />
-                            <FormInput
-                                label="Address"
-                                value={data?.address}
-                                onChange={(e) =>
-                                    setData("address", e.target.value)
-                                }
-                                error={errors?.address}
-                            />
+                        <div className="space-y-1 my-3 grid grid-cols-2 gap-5">
+                            <div>
+                                <FormInput
+                                    label="Name"
+                                    value={data?.name}
+                                    onChange={(e) =>
+                                        setData("name", e.target.value)
+                                    }
+                                    error={errors?.name}
+                                />
+                                <FormInput
+                                    label="Email Address"
+                                    value={data?.email}
+                                    onChange={(e) =>
+                                        setData("email", e.target.value)
+                                    }
+                                    error={errors?.email}
+                                />
+                                <FormInput
+                                    label="Phone"
+                                    value={data?.phone}
+                                    onChange={(e) =>
+                                        setData("phone", e.target.value)
+                                    }
+                                    error={errors?.phone}
+                                />
+                            </div>
+                            <div>
+                                <FormInput
+                                    label="Address"
+                                    value={data?.address}
+                                    onChange={(e) =>
+                                        setData("address", e.target.value)
+                                    }
+                                    error={errors?.address}
+                                />
+                                <div>
+                                    <FormSelect
+                                        label="Province"
+                                        options={provinces.map((province) => ({
+                                            label: province.name,
+                                            value: province.id,
+                                        }))}
+                                        value={data?.province_id}
+                                        onChange={(e) =>
+                                            setData(
+                                                "province_id",
+                                                e.target.value
+                                            )
+                                        }
+                                        error={errors?.province_id}
+                                    />
+                                    <FormSelect
+                                        label="Regency"
+                                        options={regencies.map((regency) => ({
+                                            label: regency.name,
+                                            value: regency.id,
+                                        }))}
+                                        value={data?.regency_id}
+                                        onChange={(e) =>
+                                            setData(
+                                                "regency_id",
+                                                e.target.value
+                                            )
+                                        }
+                                        error={errors?.regency_id}
+                                    />
+                                    <FormSelect
+                                        label="District"
+                                        options={districts.map((district) => ({
+                                            label: district.name,
+                                            value: district.id,
+                                        }))}
+                                        value={data?.district_id}
+                                        onChange={(e) =>
+                                            setData(
+                                                "district_id",
+                                                e.target.value
+                                            )
+                                        }
+                                        error={errors?.district_id}
+                                    />
+                                    <FormSelect
+                                        label="Village"
+                                        options={villages.map((village) => ({
+                                            label: village.name,
+                                            value: village.id,
+                                        }))}
+                                        value={data?.village_id}
+                                        onChange={(e) =>
+                                            setData(
+                                                "village_id",
+                                                e.target.value
+                                            )
+                                        }
+                                        error={errors?.village_id}
+                                    />
+                                </div>
+                            </div>
                         </div>
                         <div className="text-right">
                             <button className="btn btn-primary">Save</button>

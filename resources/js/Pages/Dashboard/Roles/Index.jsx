@@ -80,6 +80,15 @@ export default function IndexRoles() {
                                 <div className="flex space-x-2">
                                     <Link
                                         href={route(
+                                            "dashboard.roles.show",
+                                            record.id
+                                        )}
+                                        className="btn btn-sm btn-primary btn-outline"
+                                    >
+                                        Detail
+                                    </Link>
+                                    <Link
+                                        href={route(
                                             "dashboard.roles.edit",
                                             record.id
                                         )}
