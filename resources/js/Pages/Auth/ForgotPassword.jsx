@@ -1,6 +1,3 @@
-import InputError from "@/Components/Archived/InputError";
-import PrimaryButton from "@/Components/Archived/PrimaryButton";
-import TextInput from "@/Components/Archived/TextInput";
 import { Head, useForm } from "@inertiajs/react";
 import AuthLayout from "@/Layouts/AuthLayout";
 import FormInput from "@/Components/atoms/FormInput";

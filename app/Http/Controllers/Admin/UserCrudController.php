@@ -27,7 +27,7 @@ class UserCrudController extends Controller
             return $query->orderBy($sortField, request('sortDirection') ? request('sortDirection') : 'asc');
         });
 
-        $users = $userQuery->with('roles')->paginate(15);
+        $users = $userQuery->with('roles')->paginate(5);
 
         return Inertia::render('Dashboard/Users/Index', compact('users'));
     }

@@ -3,7 +3,6 @@ import { Link, router, usePage } from "@inertiajs/react";
 import React, { useEffect } from "react";
 import { HiOutlineHome, HiOutlineUser, HiOutlineUsers } from "react-icons/hi2";
 import { toast } from "sonner";
-import { IoSettingsOutline } from "react-icons/io5";
 import { BsCardImage } from "react-icons/bs";
 
 export default function DashboardLayout({ children }) {
@@ -34,7 +33,11 @@ export default function DashboardLayout({ children }) {
                             <div className="w-10 rounded-full">
                                 <img
                                     alt="Tailwind CSS Navbar component"
-                                    src={auth.user.detail.profile_picture}
+                                    src={
+                                        auth?.user?.detail?.profile_picture ??
+                                        "https://ui-avatars.com/api/?name=" +
+                                            auth?.user?.name
+                                    }
                                 />
                             </div>
                         </div>

@@ -1,9 +1,11 @@
 import FormCheck from "@/Components/atoms/FormCheck";
 import FormInput from "@/Components/atoms/FormInput";
+import MediaLibrary from "@/Components/organisms/MediaLibrary";
 import DashboardLayout from "@/Layouts/DashboardLayout";
 import { Link, useForm, usePage } from "@inertiajs/react";
 import React from "react";
 import { FiSave } from "react-icons/fi";
+import { HiArrowUpTray } from "react-icons/hi2";
 
 export default function ManageUser() {
     const page = usePage().props;
@@ -26,6 +28,7 @@ export default function ManageUser() {
             post(route("dashboard.users.store"));
         }
     };
+
     return (
         <DashboardLayout>
             <div className="flex items-center justify-between">
