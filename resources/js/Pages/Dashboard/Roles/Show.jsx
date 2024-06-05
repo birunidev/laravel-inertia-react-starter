@@ -77,7 +77,7 @@ export default function IndexRoles() {
                 <div className="max-w-sm space-y-4">
                     <DataLabel label="Name" value={role.display_name} />
                     <DataLabel label="Key" value={role.name} />
-                    <DataLabel label="Total Users" value={role.display_name} />
+                    <DataLabel label="Total Users" value={role.user_count} />
                 </div>
             </PageSection>
             <PageSection

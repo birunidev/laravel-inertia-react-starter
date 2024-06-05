@@ -67,7 +67,8 @@ class RoleCrudController extends Controller
         $role = Role::findOrFail($id);
         $rolePermissions = $role->permissions->pluck('name')->toArray();
         $permissionGroups = PermissionGroup::with('permissions')->get();
-
+        // user count 
+        $role->user_count = $role->users()->count();
         return Inertia::render('Dashboard/Roles/Show', compact('role', 'rolePermissions', 'permissionGroups'));
     }
 
