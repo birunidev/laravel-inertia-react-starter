@@ -25,7 +25,6 @@ Route::middleware('auth')->prefix('dashboard')->as('dashboard.')->group(function
         return Inertia::render('Dashboard');
     })->name('index');
 
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
 
     Route::resource('users', UserCrudController::class)->names([
         'index' => 'users',
