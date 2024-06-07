@@ -8,10 +8,12 @@ use App\Models\Regency;
 use App\Models\User;
 use App\Models\Village;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
+
+
+use Illuminate\Routing\Controllers\HasMiddleware;
 
 class ProfileController extends Controller implements HasMiddleware
 {

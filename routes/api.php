@@ -9,9 +9,9 @@ use App\Http\Controllers\API\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('users', UserController::class);
 });
 
-Route::apiResource('users', UserController::class);
 Route::apiResource('roles', RoleController::class);
 Route::post('/media/bulk-upload', [MediaController::class, 'bulkStore']);
 Route::apiResource('media', MediaController::class);

@@ -46,7 +46,7 @@ class PermissionGroupCrudController extends Controller
     {
         //
         $request->validate([
-            'name' => 'required|string|unique:permissions,name',
+            'name' => 'required|string|unique:permission-groups,name',
         ]);
 
         PermissionGroup::create($request->all());
@@ -81,7 +81,7 @@ class PermissionGroupCrudController extends Controller
     public function update(Request $request, string $id)
     {
         $request->validate([
-            'name' => 'required|string|unique:permissions,name,' . $id,
+            'name' => 'required|string|unique:permission-groups,name,' . $id,
             'display_name' => 'required|string',
         ]);
 
