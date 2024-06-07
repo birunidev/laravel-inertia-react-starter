@@ -82,7 +82,6 @@ class PermissionGroupCrudController extends Controller
     {
         $request->validate([
             'name' => 'required|string|unique:permission_groups,name,' . $id,
-            'display_name' => 'required|string',
         ]);
 
         $permission = PermissionGroup::findOrFail($id);
