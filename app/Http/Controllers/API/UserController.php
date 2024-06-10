@@ -6,11 +6,22 @@ use App\Http\Controllers\API\BaseController;
 use App\Http\Requests\User\CreateUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
 use App\Models\User;
+use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Routing\Controllers\Middleware;
 
-class UserController extends BaseController
+
+class UserController extends BaseController implements HasMiddleware
 {
     //
+
+    public static function middleware()
+    {
+        return [
+            new Middleware('can:find-all-user', only: ['index']),
+        ];
+    }
+
     public function index()
     {
         try {

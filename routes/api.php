@@ -8,15 +8,15 @@ use App\Http\Controllers\API\RoleController;
 use App\Http\Controllers\API\UserController;
 use Illuminate\Support\Facades\Route;
 
+Route::post('/media/bulk-upload', [MediaController::class, 'bulkStore']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('users', UserController::class);
+    Route::apiResource('roles', RoleController::class);
+    Route::apiResource('media', MediaController::class);
+    Route::apiResource('permissions', PermissionController::class);
+    Route::apiResource('permission-groups', PermissionGroupController::class);
 });
 
-Route::apiResource('roles', RoleController::class);
-Route::post('/media/bulk-upload', [MediaController::class, 'bulkStore']);
-Route::apiResource('media', MediaController::class);
-Route::apiResource('permissions', PermissionController::class);
-Route::apiResource('permission-groups', PermissionGroupController::class);
 
 Route::prefix('auth')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);

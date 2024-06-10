@@ -35,6 +35,7 @@ Route::middleware('auth')->prefix('dashboard')->as('dashboard.')->group(function
         'update' => 'users.update',
         'destroy' => 'users.destroy',
     ]);
+
     Route::resource('roles', RoleCrudController::class)->names([
         'index' => 'roles',
         'create' => 'roles.create',

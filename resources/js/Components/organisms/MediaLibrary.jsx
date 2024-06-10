@@ -25,6 +25,7 @@ export default function MediaLibrary({
         for (let i = 0; i < files.length; i++) {
             if (files[i].size > 1024 * 1024 * 2) {
                 alert("File size exceeds the limit of 2MB");
+                setUploading(false);
                 return;
             }
         }
